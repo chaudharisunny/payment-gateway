@@ -5,7 +5,10 @@ dotenv.config()
 const port=process.env.port
 const db=require('./model/db')
 const indexRouter=require('./routes/index')
+const bodyParser=require('body-parser')
 
+
+app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
 app.use('/',indexRouter)
 
