@@ -38,7 +38,6 @@ const editProduct=async(req,res)=>{
 const deleteProduct=async(req,res)=>{
     try {
         const{id}=req.params 
-
         const existingProd=await Product.findById(id)
         if(!existingProd){
            return res.status(400).json({message:'id is not found'})
