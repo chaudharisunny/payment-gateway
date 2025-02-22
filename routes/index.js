@@ -5,6 +5,7 @@ const userController=require('../controller/user')
 const productController=require('../controller/product')
 const cartController=require('../controller/cart')
 const auth = require('../middleware/auth')
+const orderController=require('../controller/order')
 
 //user routes
 
@@ -22,4 +23,8 @@ router.delete('/deleteproduct/:id',productController.deleteProduct)
 router.post('/addcart',auth,cartController.addCart)
 router.post('/removecart',auth,cartController.removeCart)
 router.post('/clearcart',auth,cartController.clearCart)
+
+router.post('/createOrder',orderController.createOrder)
+router.get('/orderDetails/:orderId',orderController.detailOrder)
+router.post("/cancelOrder/:orderId",orderController.cancelOrder)
 module.exports =router
