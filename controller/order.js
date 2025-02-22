@@ -2,6 +2,21 @@ const Order=require('../model/order');
 const Cart=require('../model/cart'); 
 const mongoose=require('mongoose');
 
+const allOrder= async (req, res) => {
+    const { userId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ error: "Invalid userId format" });
+    }
+
+    try {
+        const orders = await Order.find({ userId }).sort({ createdAt: -1 });
+        res.json(orders);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 const createOrder=async(req,res)=>{
     const {userId}=req.body 
 
@@ -80,4 +95,4 @@ try {
 }
 
 }
-module.exports={createOrder,detailOrder,cancelOrder}
+module.exports={allOrder,createOrder,detailOrder,cancelOrder}
